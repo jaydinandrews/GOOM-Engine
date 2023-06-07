@@ -1,4 +1,5 @@
 # GOOM Engine/Game
+*This project is still very much indev*
 A raycasting engine like the one used in [id Software's](https://github.com/id-Software) [Wolfenstein 3D](https://github.com/id-Software/wolf3d).
 
 ## Credits

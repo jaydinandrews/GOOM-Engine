@@ -8,11 +8,13 @@ set(LIBRARY_HEADERS_DIR
 set(LIBRARY_HEADERS
     ${LIBRARY_HEADERS_DIR}/I_Application.h
     ${LIBRARY_HEADERS_DIR}/R_Renderer.h
+    ${LIBRARY_HEADERS_DIR}/G_Game.h
 )
 set(LIBRARY_SOURCE_DIR src)
 set(LIBRARY_SOURCES
     ${LIBRARY_SOURCE_DIR}/I_Application.c
     ${LIBRARY_SOURCE_DIR}/R_Renderer.c
+    ${LIBRARY_SOURCE_DIR}/G_Game.c
 )
 project(${PROJECT_NAME})
 
