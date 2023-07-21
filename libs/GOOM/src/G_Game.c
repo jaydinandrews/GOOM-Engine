@@ -1,20 +1,12 @@
 #include "GOOM/G_Game.h"
-#include "I_Application.h"
 
-void G_MainLoop(app_t *app) {
-  switch (app->state) {
-  case STATE_INIT:
-    break;
-  case STATE_MENU:
-    break;
-  case STATE_GAME:
-    G_GameLoop(app);
-    break;
-  default:
-    break;
-  }
+void G_InitGame(game_t *game) {
+  game->frame = 0;
+  game->frame_time = 0;
+  game->current_random = 0;
+  game->running = 1;
 }
 
-void G_GameLoop(app_t *app) {
-    return;
+uint8_t G_GameMainLoop(){
+  return 1;
 }

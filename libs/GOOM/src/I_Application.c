@@ -1,36 +1,45 @@
 #include "GOOM/I_Application.h"
-#include "GOOM/R_Renderer.h"
+#include "GOOM/G_Game.h"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
 #include <time.h>
 
 void I_InitApplication(app_t *app, char *title, unsigned int width,
                        unsigned int height) {
-  app->quit = false;
-  SDL_Init(SDL_INIT_EVERYTHING);
-  uint32_t window_flags = 0;
-  SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+  app->running = 1;
+  SDL_Init(SDL_INIT_AUDIO);
   app->window =
       SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                       width, height, window_flags);
+                       width, height, SDL_WINDOW_SHOWN);
+  app->renderer = SDL_CreateRenderer(app->window, -1, 0);
+  app->texture = SDL_CreateTexture(app->renderer, SDL_PIXELFORMAT_RGB565,
+                                   SDL_TEXTUREACCESS_STATIC, width, height);
   app->window_surface = SDL_GetWindowSurface(app->window);
-  app->window_width = app->window_surface->w;
-  app->window_pixels = app->window_surface->pixels;
-
-  R_InitRenderer(app);
-  I_ChangeState(app, STATE_GAME);
+  app->pixels = app->window_surface->pixels;
 }
 
-void I_QuitApplication(app_t *app) {
-  SDL_FreeSurface(app->raycast_surface);
-  SDL_FreeSurface(app->window_surface);
-  SDL_DestroyWindow(app->window);
-  SDL_Quit();
-}
+void I_AppMainLoop(app_t *app) {
+  SDL_Event event;
 
-void I_ChangeState(app_t *app, gamestate_e state) {
-  app->state = state;
-  // relative mouse mode??
+  while (SDL_PollEvent(&event)) {
+    if (event.type == SDL_QUIT) {
+      app->running = 0;
+    }
+  }
+
+  //if not Game main loop:
+    //running = 0
+  if(!G_GameMainLoop()) {
+    app-> running = 0;
+  }
+
+  SDL_UpdateTexture(app->texture, NULL, app->pixels, app->window_surface->w * sizeof(uint16_t));
+  SDL_RenderClear(app->renderer);
+  SDL_RenderCopy(app->renderer, app->texture, NULL, NULL);
+  SDL_RenderPresent(app->renderer);
 }

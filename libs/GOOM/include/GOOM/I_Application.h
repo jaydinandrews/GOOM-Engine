@@ -2,24 +2,21 @@
 #define APPLICATION_H
 
 #include <SDL2/SDL.h>
-#include <stdbool.h>
-
-typedef enum gamestate_e { STATE_INIT = 0, STATE_MENU, STATE_GAME } gamestate_e;
+#include <SDL2/SDL_audio.h>
+#include <SDL2/SDL_render.h>
 
 typedef struct app_s {
+  int running;
   SDL_Window *window;
+  SDL_Renderer *renderer;
+  SDL_Texture *texture;
   SDL_Surface *window_surface;
-  int window_width;
-  unsigned int *window_pixels;
-  SDL_Surface *raycast_surface;
-  unsigned int *raycast_pixels;
-  gamestate_e state;
-  bool quit;
+  unsigned int *pixels;
 } app_t;
 
 void I_InitApplication(app_t *app, char *title, unsigned int width,
                        unsigned int height);
-void I_QuitApplication(app_t *app);
-void I_ChangeState(app_t *app, gamestate_e state);
+void I_AppMainLoop(app_t *app);
+
 
 #endif /* APPLICATION_H */
