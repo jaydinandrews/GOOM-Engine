@@ -1,4 +1,4 @@
-#include "GOOM/G_Game.h"
+#include "G_Game.h"
 
 void G_InitGame(game_t *game) {
   game->frame = 0;

@@ -1,5 +1,5 @@
-#include "GOOM/I_Application.h"
-#include "GOOM/G_Game.h"
+#include "I_Application.h"
+#include "G_Game.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
