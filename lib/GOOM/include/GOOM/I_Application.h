@@ -1,9 +1,16 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "G_Game.h"
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_audio.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_surface.h>
+#include <SDL2/SDL_video.h>
+#include <time.h>
 
 typedef struct app_s {
   int running;
@@ -16,7 +23,7 @@ typedef struct app_s {
 
 void I_InitApplication(app_t *app, char *title, unsigned int width,
                        unsigned int height);
-void I_AppMainLoop(app_t *app);
+void I_AppMainLoop(app_t *app, game_t *game);
 
 
 #endif /* APPLICATION_H */

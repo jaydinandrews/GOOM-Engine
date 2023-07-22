@@ -7,7 +7,9 @@ set(LIBRARY_NAME GOOM)
 set(LIBRARY_HEADERS_DIR include/${LIBRARY_NAME})
 set(LIBRARY_HEADERS
   ${LIBRARY_HEADERS_DIR}/G_Game.h
+  ${LIBRARY_HEADERS_DIR}/G_Settings.h
   ${LIBRARY_HEADERS_DIR}/I_Application.h
+  ${LIBRARY_HEADERS_DIR}/M_Menu.h
 )
 
 # Sources
@@ -15,6 +17,7 @@ set(LIBRARY_SOURCE_DIR src)
 set(LIBRARY_SOURCES
   ${LIBRARY_SOURCE_DIR}/G_Game.c
   ${LIBRARY_SOURCE_DIR}/I_Application.c
+  ${LIBRARY_SOURCE_DIR}/M_Menu.c
 )
 
 project(${PROJECT_NAME})

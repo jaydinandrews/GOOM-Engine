@@ -1,13 +1,7 @@
 #include "I_Application.h"
 #include "G_Game.h"
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_pixels.h>
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_surface.h>
-#include <SDL2/SDL_video.h>
-#include <time.h>
+
 
 void I_InitApplication(app_t *app, char *title, unsigned int width,
                        unsigned int height) {
@@ -23,7 +17,7 @@ void I_InitApplication(app_t *app, char *title, unsigned int width,
   app->pixels = app->window_surface->pixels;
 }
 
-void I_AppMainLoop(app_t *app) {
+void I_AppMainLoop(app_t *app, game_t *game) {
   SDL_Event event;
 
   while (SDL_PollEvent(&event)) {
@@ -34,7 +28,7 @@ void I_AppMainLoop(app_t *app) {
 
   //if not Game main loop:
     //running = 0
-  if(!G_GameMainLoop()) {
+  if(!G_GameMainLoop(game)) {
     app-> running = 0;
   }
 

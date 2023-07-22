@@ -10,7 +10,7 @@
 int main(int argc, char *argv[]) {
 
   app_t app;
-  I_InitApplication(&app, "WIP-GAME", 640, 480);
+  I_InitApplication(&app, "WIP-GAME", WINDOW_WIDTH, WINDOW_HEIGHT);
 
   game_t game;
   G_InitGame(&game);
@@ -19,13 +19,13 @@ int main(int argc, char *argv[]) {
   // controller open
   // audio
 
-    // show cursor
+  // show cursor
   // PumpEvents
   // Game Controller Update
 
   SDL_PumpEvents();
   while (app.running) {
-    I_AppMainLoop(&app);
+    I_AppMainLoop(&app, &game);
   }
 
   // close controller
