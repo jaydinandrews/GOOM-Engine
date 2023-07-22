@@ -1,3 +1,5 @@
+#include "settings.h"
+
 #include "GOOM/I_Application.h"
 #include "GOOM/G_Game.h"
 #include <SDL2/SDL_events.h>
