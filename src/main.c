@@ -2,6 +2,7 @@
 
 #include "GOOM/I_Application.h"
 #include "GOOM/G_Game.h"
+
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_render.h>

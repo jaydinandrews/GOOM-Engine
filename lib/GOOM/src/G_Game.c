@@ -1,4 +1,5 @@
 #include "G_Game.h"
+#include "M_Menu.h"
 
 void G_InitGame(game_t *game) {
   game->frame = 0;

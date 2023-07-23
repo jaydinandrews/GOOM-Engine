@@ -26,7 +26,7 @@ void I_AppMainLoop(app_t *app, game_t *game) {
   //if not Game main loop:
     //running = 0
   if(!G_GameMainLoop(game)) {
-    app-> running = 0;
+    app->running = 0;
   }
 
   SDL_UpdateTexture(app->texture, NULL, app->pixels, app->window_surface->w * sizeof(uint16_t));
