@@ -5,11 +5,12 @@
 
 void M_GameStepMenu(game_t *game) {
   uint8_t menu_items = 0;
-  while(M_GetMenuItem(menu_items) != MENU_ITEM_NONE) {
+  uint8_t is_saved = game->save[0] >> 4;
+  while(M_GetMenuItem(menu_items, is_saved) != MENU_ITEM_NONE) {
     menu_items++;
   }
 
-  uint8_t item = M_GetMenuItem(game->current_menu_item);
+  uint8_t item = M_GetMenuItem(game->current_menu_item, is_saved);
 
   if(G_KeyRegisters(game, KEY_DOWN) && (game->current_menu_item < menu_items -1)) {
     game->current_menu_item++;
@@ -23,10 +24,10 @@ void M_GameStepMenu(game_t *game) {
         for(uint8_t i = 6; i < SAVE_SIZE; ++i) {
           game->save[i] = 0;
         }
-        if(game->current_level == 0) {
+        if(game->current_menu_level == 0) {
           G_SetGameState(game, GAME_STATE_INTRO);
         } else {
-          G_InitLevel(game, game->current_level);
+          G_InitLevel(game, game->current_menu_level);
         }
         break;
       case MENU_ITEM_LOAD:
@@ -45,20 +46,24 @@ void M_GameStepMenu(game_t *game) {
         break;
     }
   } else if(item == MENU_ITEM_PLAY) {
-    if(G_KeyRegisters(game, KEY_RIGHT) && (game->current_level < (game->save[0] & 0x0F))) {
-      game->current_level++;
+    if(G_KeyRegisters(game, KEY_RIGHT) && (game->current_menu_level < (game->save[0] & 0x0F))) {
+      game->current_menu_level++;
       //TODO: play sound
-    } else if (G_KeyRegisters(game, KEY_LEFT) && (game->current_level > 0)) {
-      game->current_level--;
+    } else if (G_KeyRegisters(game, KEY_LEFT) && (game->current_menu_level > 0)) {
+      game->current_menu_level--;
       //TODO: play sound
     }
   }
 }
 
-uint8_t M_GetMenuItem(uint8_t index) {
+uint8_t M_GetMenuItem(uint8_t index, uint8_t is_saved) {
   uint8_t current_item = 0;
   while (1) { // find first valid item
     // skip non valid items (load if no load available)
+    if((current_item == MENU_ITEM_LOAD) && (is_saved == 0)) {
+      current_item++;
+      continue;
+    }
 
     if (index == 0) {
       return (current_item <= MENU_ITEM_EXIT) ? current_item : MENU_ITEM_NONE;

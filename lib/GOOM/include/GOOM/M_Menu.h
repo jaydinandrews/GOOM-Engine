@@ -13,7 +13,7 @@
 #define MENU_ITEM_NONE 255
 
 void M_GameStepMenu(game_t *game);
-uint8_t M_GetMenuItem(uint8_t index);
+uint8_t M_GetMenuItem(uint8_t index, uint8_t is_saved);
 
 
 #endif /* MENU_H */
