@@ -1,7 +1,4 @@
 #include "I_Application.h"
-#include "G_Game.h"
-
-
 
 void I_InitApplication(app_t *app, char *title, unsigned int width,
                        unsigned int height) {

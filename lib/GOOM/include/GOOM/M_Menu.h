@@ -1,8 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "G_Settings.h"
 #include "G_Game.h"
+
 #include <stdint.h>
 
 #define MENU_ITEM_CONTINUE 0
