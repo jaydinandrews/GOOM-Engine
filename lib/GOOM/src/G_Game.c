@@ -1,4 +1,5 @@
 #include "G_Game.h"
+#include "G_Input.h"
 #include "M_Menu.h"
 
 void G_InitGame(game_t *game) {
@@ -54,6 +55,9 @@ void G_GameStep(game_t *game) {
   //TODO: get key state for changes
 
   switch(game->state) {
+    case GAME_STATE_PLAYING:
+      G_GameStepPlaying(game);
+      break;
     case GAME_STATE_MENU:
       M_GameStepMenu(game);
       break;
@@ -61,4 +65,19 @@ void G_GameStep(game_t *game) {
       break;
   }
   game->state_time += MS_PER_FRAME;
+}
+
+void G_GameStepPlaying(game_t *game) {
+  if(G_KeyIsDown(game, KEY_MENU)) {
+    G_SetGameState(game, GAME_STATE_MENU);
+    //TODO: play sound
+    return;
+  }
+
+  G_UpdateLevel();
+
+}
+
+void G_InitLevel(game_t *game, uint8_t level_number) {
+  //TODO
 }

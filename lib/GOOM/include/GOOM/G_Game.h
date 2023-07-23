@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "G_Settings.h"
+#include "G_Level.h"
 
 #include <stdint.h>
 #include <SDL2/SDL_timer.h>
@@ -22,7 +23,9 @@ typedef struct game_s {
   uint32_t state_time; // time since last state change
   uint8_t key_state[KEY_COUNT]; // state all input keys
   uint8_t current_menu_item; // current item when in GAME_STATE_MENU
-  uint8_t current_level;
+  uint8_t current_menu_level; // current level number when in GAME_STATE_MENU
+
+  currentLevel_t current_level;
 
   uint32_t frame; // current frame number
   uint32_t frame_time; // time of current frame start
@@ -41,5 +44,7 @@ void G_InitGame(game_t *game);
 void G_SetGameState(game_t *game, uint8_t state);
 uint8_t G_GameMainLoop(game_t *game);
 void G_GameStep(game_t *game);
+void G_GameStepPlaying(game_t *game);
+void G_InitLevel(game_t *game, uint8_t level_number);
 
 #endif /* GAME_H */
